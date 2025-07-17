@@ -1,6 +1,16 @@
 FROM almalinux:9
-RUN  dnf install nginx -y
-RUN  rm -rf /usr/share/nginx/html/index.html
-ADD https://raw.githubusercontent.com/daws-84s/notes/refs/heads/main/session-01.txt /usr/share/nginx/html/index.html
+
+# Install nginx and curl
+RUN dnf install -y nginx curl
+
+# Remove default index.html
+RUN rm -rf /usr/share/nginx/html/index.html
+
+# Download index.html properly
+RUN curl -o /usr/share/nginx/html/index.html https://raw.githubusercontent.com/daws-84s/notes/main/session-01.txt
+
+# Ensure file permissions (optional)
 RUN chmod +r /usr/share/nginx/html/index.html
-CMD ["nginx","-g","daemon off;"]
+
+# Start nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
