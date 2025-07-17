@@ -3,4 +3,5 @@ RUN dnf install nginx -y
 RUN useradd monnish
 USER monnish
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["google.com"]
+ENTRYPOINT [ "ping" ]
